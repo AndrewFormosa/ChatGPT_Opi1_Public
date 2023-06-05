@@ -48,9 +48,12 @@ async function getData(folder,id,maxJsonSize){
     const  pathOfRequiredJson=FullFilePath(folder,fileNumber);
     data = await operateOnJSONFile(pathOfRequiredJson,id,'lookUp');
     if(data!=null){
-    return data}else{error('no id');return{};}
+    return data}else{
+      //error('no id');
+      return{};}
   }else{
-    error('no files');return{};
+    //error('no files')
+    ;return{};
   }
 }
 

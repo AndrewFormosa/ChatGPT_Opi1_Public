@@ -29,6 +29,9 @@ app.post('/recAndSendData/', async (req, res) => { //include async to allow awai
     res.json({ response: opiResponse }); 
 });
 
+
+
+
 app.listen(port, () => {
     console.log('listening on port ' + port)
 })

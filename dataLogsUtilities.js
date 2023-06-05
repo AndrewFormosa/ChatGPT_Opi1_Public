@@ -58,7 +58,7 @@ async function getData(folder,id,maxJsonSize){
 async function updateData(folder,id,maxJsonSize,data){
   numberOfFiles = await countFilesInDirectory(folder);
   const fileNumber =Math.floor((id-1)/maxJsonSize)+1;
-  console.log('fileNo:'+fileNumber);
+ // console.log('fileNo:'+fileNumber);
   if(numberOfFiles>=fileNumber){
     const  pathOfRequiredJson=FullFilePath(folder,fileNumber);
     operateOnJSONFile(pathOfRequiredJson,data,'update');

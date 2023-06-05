@@ -110,7 +110,7 @@ async function setUpNewChat(){
 
 
 async function converse(message){
-
+    console.log("User: "+message);
     //should check if conversation is getting large - if so then we should look to summarize
 
     clearTimeout(timer);
@@ -156,7 +156,7 @@ async function converse(message){
     logDialogAndEmbeddings(message,messageAnalysis,messageTime,messageEmbedding,response);
 
     //set up new chat if time out or if conversation is greater than max size.
-    console.log('chatSize:'+currentConversationArray.length)
+    //console.log('chatSize:'+currentConversationArray.length)
     if(currentConversationArray.length>appSettings.maxChatSize){
         setUpNewChat();
     }else{
@@ -253,7 +253,7 @@ async function getMostSimmilarChats(messageEmbedding){
         var chatSummary = chatSummaryObject.summary;
         similarMemories = similarMemories + chatSummary+'\n';
       };
-
+      console.log('Opi1: '+response);
     return similarMemories;
 
     //set up list of chat numbers

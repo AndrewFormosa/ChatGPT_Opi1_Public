@@ -1,0 +1,25 @@
+{
+  "name": "chatgpt_opi1",
+  "version": "1.0.0",
+  "description": "Personal Chat Companion using ChatGPT APIs",
+  "main": "app.js",
+  "scripts": {
+    "test": "Node App.js",
+    "start": "Node App.js"
+  },
+  "keywords": [
+    "Chat",
+    "Opi",
+    "API"
+  ],
+  "author": "Andrew Formosa",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "lowdb": "^6.0.1",
+    "openai": "^3.2.1"
+  }
+}

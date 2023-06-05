@@ -1,0 +1,111 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opi</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css"> <!--ref /styles within public directory which is set in static files middleware within app-->
+
+    <style>
+        #square {
+          width: 200px;
+          height: 200px;
+          background-image: url('/robot1.png');
+          background-size: 200px 200px;
+          border:solid, green, 2px;
+        }
+      </style>
+
+</head>
+<body>
+  <div id="appContainer" style="display: flex; flex-direction: column; align-items: center;">
+
+
+
+    <h1>Opi</h1>
+
+    <!--Simple form to taking data and showing response-->
+    <label for="myMessage">I say:</label>
+    <input id="myMessage" width="100" height="100" onkeydown="handleKeyPress(event)">
+    <button onclick="sendAndRecData()">Speak</button>
+    <br>
+    
+   
+    <div id="square"></div>
+  <div id="response"></div>
+
+  </div>
+    <script>
+
+function handleKeyPress(event) {
+  if (event.keyCode === 13) { // Check if the pressed key is the Enter key
+    event.preventDefault(); // Prevent the default behavior of the Enter key
+
+    // Call your desired function here
+    sendAndRecData();
+  }
+}
+
+
+
+        //Send json to server at specific end point and recieve json back and convert to data. 
+        //we could receive texts instead but we would need to change the .then(res=>res.json()) into (function(res){return res.text()}) because Promise doesn't give you right away the data in the right format; it in fact gives you a Response object, on which you need to call the corresponding method to the format you desire (Blob, JSON, arrayBuffer, etc.)
+         async function sendAndRecData(){
+          wakeUp();
+            myMessageElement=document.getElementById('myMessage');
+            //get data to send.
+            jsonToSend={myMessage:myMessageElement.value};
+            myMessageElement.value="";
+            
+            //use fetch to send and receive json data.
+              await fetch('/recAndSendData/',{ //specify end point.
+                method:'POST', //make it a post request.
+                headers:{'Content-Type':'application/json'}, //set content type
+                body:JSON.stringify(jsonToSend) //convert json to string to send as body.
+            })
+            .then(res=>res.json()) //.json() method takes a Response stream and reads it to completion. It returns a promise which resolves with the result of parsing the body text as JSON.
+            .then(data=>{ //this result is then the json that we can use to extract the data needed
+                var response = data.response; //get the data from the json
+                console.log(response);
+                document.getElementById('response').innerHTML=response; // use the data in the web page.
+                speakAnswer(response);
+            })
+        }
+
+    </script>
+
+   <script type="text/javascript" src="/speech1.js"></script> <!--speakAnswer function providing script-->
+
+   <script>
+    // Get a reference to the square element
+    var square = document.getElementById("square");
+
+    // Create a new SpeechSynthesisUtterance object
+    var msg = new SpeechSynthesisUtterance();
+    msg.rate=0.5;
+
+    // Set the text that you want to synthesize
+    msg.text = "This is a test.";
+
+    // Set the onboundary event handler
+    msg.onboundary = function(event) {
+        // Toggle the background color of the square between red and white
+        if (event.name === "word") {
+         // square.style.backgroundColor = "red";
+            square.style.backgroundImage()
+          setTimeout(function() {
+          //  square.style.backgroundColor = "white";
+          }, event.elapsedTime/2);
+        }
+      };
+
+    // Start the speech synthesis
+    function speak(){
+    
+    window.speechSynthesis.speak(msg);
+}
+  </script>
+</body>
+
+
+</html>

@@ -163,6 +163,7 @@ async function converse(message){
          timer = setTimeout(setUpNewChat, appSettings.chatTimeOut); // Start timer to beging new chat if no more conversation within givien time out
     }
     //return response
+    console.log('Opi1: '+response);
     return response;
    
 }
@@ -253,7 +254,7 @@ async function getMostSimmilarChats(messageEmbedding){
         var chatSummary = chatSummaryObject.summary;
         similarMemories = similarMemories + chatSummary+'\n';
       };
-      console.log('Opi1: '+response);
+
     return similarMemories;
 
     //set up list of chat numbers

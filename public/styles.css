@@ -7,12 +7,19 @@ body {
     padding: 0;
     overflow: hidden;
         color:green;
-  }
+        font-family: 'Abel', sans-serif;
+      }
   
+  h1{
+    font-family:  'Libre Barcode 128 Text', cursive;
+    font-size: larger;
+  }
+
   #appContainer {
   width:100%;
   height: 100%;
   text-align: center;
+
   }
 
   #response{
